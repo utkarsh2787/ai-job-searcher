@@ -1,0 +1,30 @@
+{
+  "name": "job-intelligence-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "services/*",
+    "frontend"
+  ],
+  "scripts": {
+    "infra:up":    "docker compose -f infra/docker-compose.yml up -d",
+    "infra:down":  "docker compose -f infra/docker-compose.yml down",
+    "infra:reset": "docker compose -f infra/docker-compose.yml down -v",
+    "infra:logs":  "docker compose -f infra/docker-compose.yml logs -f",
+
+    "dev:collector":  "npm run dev --workspace=services/feed-collector",
+    "dev:processor":  "npm run dev --workspace=services/job-processor",
+    "dev:indexer":    "npm run dev --workspace=services/search-indexer",
+    "dev:analytics":  "npm run dev --workspace=services/analytics-service",
+    "dev:api":        "npm run dev --workspace=services/search-api",
+    "dev:frontend":   "npm run dev --workspace=frontend",
+
+    "build":   "npm run build --workspaces --if-present",
+    "lint":    "npm run lint --workspaces --if-present",
+    "setup":   "bash scripts/setup.sh"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

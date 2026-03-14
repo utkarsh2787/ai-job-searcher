@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-deep:    #030810;
+    --bg-base:    #060d1a;
+    --bg-card:    #0a1628;
+    --bg-hover:   #0e1f3a;
+    --border:     #1a3352;
+    --border-bright: #1e4a7a;
+    --cyan:       #00d4ff;
+    --cyan-dim:   #0090b8;
+    --blue:       #3b82f6;
+    --purple:     #7c3aed;
+    --green:      #10b981;
+    --text-1:     #f1f5f9;
+    --text-2:     #b0bfd0;
+    --text-3:     #64748b;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+}
+
+@layer components {
+  /* Grid background pattern */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: 0 0;
+  }
+
+  /* Glow border card */
+  .card-dark {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card-dark:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.06);
+  }
+
+  /* Glow text */
+  .text-glow-cyan {
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Gradient heading */
+  .gradient-text {
+    background: linear-gradient(135deg, #e2e8f0 0%, #00d4ff 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Stat card glow */
+  .stat-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 212, 255, 0.04) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan-dim), transparent);
+    opacity: 0.6;
+  }
+
+  /* Input dark */
+  .input-dark {
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    color: var(--text-1);
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input-dark:focus {
+    outline: none;
+    border-color: var(--cyan-dim);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+  }
+  .input-dark::placeholder {
+    color: var(--text-3);
+  }
+
+  /* Button primary */
+  .btn-primary {
+    background: linear-gradient(135deg, #1d4ed8, #0891b2);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: opacity 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.25);
+  }
+
+  /* Tag / pill */
+  .tag-dark {
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    color: var(--text-2);
+    border-radius: 9999px;
+    font-size: 11px;
+    padding: 2px 8px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .tag-dark:hover, .tag-dark.active {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.4);
+    color: var(--cyan);
+  }
+
+  /* Recharts dark overrides */
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: var(--border) !important;
+  }
+  .recharts-tooltip-wrapper .recharts-default-tooltip {
+    background: var(--bg-hover) !important;
+    border: 1px solid var(--border-bright) !important;
+    border-radius: 8px !important;
+  }
+}
