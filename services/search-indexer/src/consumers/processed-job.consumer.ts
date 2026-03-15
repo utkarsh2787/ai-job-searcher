@@ -64,6 +64,9 @@ export async function startConsumer(): Promise<void> {
         return;
       }
 
+      // Skip duplicates — fingerprint hasn't changed so ES already has this exact content
+      if (!event.processing.isFirstSeen) return;
+
       batch.push({ job: event.job, source: event.source });
 
       // Flush immediately when batch is full
